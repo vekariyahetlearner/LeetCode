@@ -1,20 +1,16 @@
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
-        int n = nums.size();
-        vector<int> result(n);
-
-        result[0] = 1;
-        for (int i = 1; i < n; i++) {
-            result[i] = result[i - 1] * nums[i - 1];
+        vector<int> prefMul(nums.size(),1),sufMul(nums.size(),1),result(nums.size(),1);
+        for(int i=1;i<nums.size();i++){
+            prefMul[i]=prefMul[i-1]*nums[i-1];
         }
-
-        int suffixProduct = 1;
-        for (int i = n - 1; i >= 0; i--) {
-            result[i] *= suffixProduct;
-            suffixProduct *= nums[i];
+        for(int i=nums.size()-2;i>=0;i--){
+            sufMul[i]=sufMul[i+1]*nums[i+1];
         }
-
+        for(int i=0;i<nums.size();i++){
+            result[i]=sufMul[i]*prefMul[i];
+        }
         return result;
     }
 };
