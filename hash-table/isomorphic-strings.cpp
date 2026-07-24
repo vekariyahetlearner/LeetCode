@@ -1,13 +1,13 @@
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        unordered_map<char,char> StoT;
-        unordered_map<char,char> TtoS;
+        int lastSeenS[256], lastSeenT[256];
+        fill(lastSeenS, lastSeenS+256, -1);
+        fill(lastSeenT, lastSeenT+256, -1);
         for(int i=0; i<s.size(); i++){
-            if(StoT.count(s[i]) && StoT[s[i]]!=t[i]) return false;
-            if(TtoS.count(t[i]) && TtoS[t[i]]!=s[i]) return false;
-            StoT[s[i]]=t[i];
-            TtoS[t[i]]=s[i];      
+            if(lastSeenS[s[i]]!=lastSeenT[t[i]]) return false;
+            lastSeenS[s[i]]=i;
+            lastSeenT[t[i]]=i;
         }
         return true;
     }
