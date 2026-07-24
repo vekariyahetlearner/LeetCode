@@ -1,14 +1,17 @@
 class Solution {
 public:
     int maxNumberOfBalloons(string text) {
-        vector<int> count(26,0);
-        for(auto c:text) count[c-'a']++;
-        int minOcc= INT_MAX;
-        minOcc= min(minOcc,count['b'-'a']);
-        minOcc= min(minOcc,count['a'-'a']);
-        minOcc= min(minOcc,count['l'-'a']/2);
-        minOcc= min(minOcc,count['o'-'a']/2);
-        minOcc= min(minOcc,count['n'-'a']);
-        return minOcc;
+        unordered_map<char,int> mp;
+        string test="balon";
+        for(auto i: text){
+            mp[i]++;
+        }
+        int ans=INT_MAX;
+        for(auto i:test){
+            int x;
+            (i=='l'||i=='o')? x=mp[i]/2 : x=mp[i];
+            ans=min(ans,x);
+        }
+        return ans==INT_MAX ? 0:ans;
     }
 };
