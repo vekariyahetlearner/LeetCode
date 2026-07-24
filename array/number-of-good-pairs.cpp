@@ -1,13 +1,11 @@
 class Solution {
 public:
     int numIdenticalPairs(vector<int>& nums) {
-        unordered_map<int, int> mp;
-        for(int num: nums){
-            mp[num]++;
-        }
+        int freq[101] = {0};
         int count = 0;
-        for (auto [k,v] : mp) {
-            count += v * (v - 1) / 2;
+        for (int num : nums) {
+            count += freq[num];
+            freq[num]++;
         }
         return count;
     }
