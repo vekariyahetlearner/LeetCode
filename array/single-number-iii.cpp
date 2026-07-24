@@ -5,7 +5,7 @@ public:
         for(int num: nums){
             xorAll^=num;
         }
-        long long diffBit=(xorAll)^(-xorAll);
+        long long diffBit=(xorAll)&(-xorAll);
         int x=0;
         for(int num: nums){
             if(num & diffBit){
