@@ -2,13 +2,16 @@ class Solution {
 public:
     vector<int> singleNumber(vector<int>& nums) {
         long long xorAll=0;
-        for(auto n:nums) xorAll^=n;
-        long long d= xorAll&(-xorAll);
-        long long bucket1=0,bucket2=0;
-        for(auto n:nums){
-            if(n&d) bucket1^=n;
-            else bucket2^=n;
+        for(int num: nums){
+            xorAll^=num;
         }
-        return {(int)bucket1,(int)bucket2};
+        long long diffBit=(xorAll)^(-xorAll);
+        int x=0;
+        for(int num: nums){
+            if(num & diffBit){
+                x^=num;
+            }
+        }
+        return {x, (int)(x^xorAll)};
     }
 };
